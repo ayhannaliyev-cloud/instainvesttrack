@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABB Invest Instagram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400&display=swap">
+<style>
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --fg: #15202b; --muted: #5d6b7a; --line: #e2e6eb;
+  --accent: #1f5bd8; --accent-2: #8fb0f0; --bar: #c9d2dc; --warn: #a15c00; --me-row: #eef3fd;
+  --sans: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --r: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f141a; --panel: #161d25; --fg: #e8edf2; --muted: #93a1b0; --line: #26313d;
+    --accent: #6e9bff; --accent-2: #2f4f8f; --bar: #34404d; --warn: #f0b35c; --me-row: #1a2638; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 1200px; margin-inline: auto; padding: 32px max(16px, env(safe-area-inset-left)) 48px max(16px, env(safe-area-inset-right)); display: flex; flex-direction: column; gap: 36px; }
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0; text-wrap: balance; }
+h2 { font-size: 18px; font-weight: 500; margin: 0; }
+h3 { font-size: 15px; font-weight: 500; margin: 0; }
+.head { display: flex; flex-direction: column; gap: 10px; }
+.take { margin: 0; color: var(--muted); max-width: 70ch; }
+.take b { color: var(--fg); font-weight: 500; }
+.stamp { font-size: 13px; color: var(--muted); }
+.stamp .warn { color: var(--warn); }
+section { display: flex; flex-direction: column; gap: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: 12px; }
+.tile, .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; min-width: 0; }
+.tile { display: flex; flex-direction: column; gap: 4px; }
+.tile .label, .tile .note, .note { font-size: 13px; color: var(--muted); }
+.tile .value { font-family: var(--serif); font-size: 32px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.note { margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 12px; }
+.card { display: flex; flex-direction: column; gap: 8px; }
+.chart { position: relative; min-height: 240px; }
+.chart svg { display: block; }
+.legend { display: flex; gap: 14px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.12); padding: 6px 10px; font-size: 13px; white-space: nowrap; z-index: 2; }
+.tip .k { color: var(--muted); }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 500; color: var(--muted); position: sticky; top: 0; background: var(--panel); }
+.num { text-align: right; white-space: nowrap; }
+tr.me td { background: var(--me-row); }
+tr.me td:first-child { font-weight: 500; }
+.sort { all: unset; cursor: pointer; }
+.sort:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.posts-box { max-height: 34rem; overflow: auto; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; color: var(--muted); }
+select { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; }
+.pill { display: inline-block; font-size: 12px; padding: 0 7px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.topic a { color: var(--fg); text-decoration: none; }
+.topic a:hover { text-decoration: underline; }
+.collab { color: var(--muted); font-size: 12px; }
+.notes { margin: 0; padding-left: 1.2em; font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; max-width: 80ch; }
+.error { color: var(--warn); }
+@media (max-width: 640px) { .hide-sm { display: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <h1>ABB Invest və rəqiblər: Instagram</h1>
+    <p class="take" id="take">Məlumat yüklənir…</p>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <section>
+    <h2>ABB Invest</h2>
+    <div class="tiles">
+      <div class="tile"><span class="label">İzləyici</span><span class="value" data-f="followers">—</span><span class="note">Ümumi</span></div>
+      <div class="tile"><span class="label">Ümumi post</span><span class="value" data-f="posts_total">—</span><span class="note">Hesab açılandan bəri</span></div>
+      <div class="tile"><span class="label">Post, son 2 həftə</span><span class="value" data-f="posts_2w">—</span><span class="note">Reels daxil</span></div>
+      <div class="tile"><span class="label">Bəyənmə, son 2 həftə</span><span class="value" data-f="likes_2w">—</span><span class="note">Bütün postların cəmi</span></div>
+      <div class="tile"><span class="label">Şərh, son 2 həftə</span><span class="value" data-f="comments_2w">—</span><span class="note">Bütün postların cəmi</span></div>
+      <div class="tile"><span class="label">Engagement rate</span><span class="value" data-f="eng_rate">—</span><span class="note">Bir postun median reaksiyası ÷ izləyici</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rəqiblərlə müqayisə</h2>
+    <div class="grid">
+      <div class="card"><h3>İzləyici sayı</h3><p class="note">Hər hesabın ümumi izləyicisi</p><div class="chart" id="ch-followers"></div></div>
+      <div class="card"><h3>Son 2 həftədə paylaşılan postlar</h3><p class="note">Post və Reels ayrıca göstərilib</p>
+        <div class="legend"><span><i style="background:var(--accent)"></i>Post</span><span><i style="background:var(--accent-2)"></i>Reels</span></div>
+        <div class="chart" id="ch-posts"></div></div>
+      <div class="card"><h3>Bir postun median bəyənməsi</h3><p class="note">Son 2 həftə. Median götürülüb ki, bir viral post nəticəni əyməsin</p><div class="chart" id="ch-median"></div></div>
+      <div class="card"><h3>Engagement rate</h3><p class="note">Son 2 həftə. Bir postun median bəyənmə+şərh sayı ÷ izləyici</p><div class="chart" id="ch-eng"></div></div>
+    </div>
+    <div class="card">
+      <h3>Bütün hesablar</h3>
+      <p class="note">Son 2 həftə: <span id="window">—</span></p>
+      <div class="scroll">
+        <table id="tbl-summary">
+          <thead><tr><th>Hesab</th><th class="num">İzləyici</th><th class="num hide-sm">Ümumi post</th><th class="num">Post (2 h.)</th><th class="num hide-sm">Reels (2 h.)</th><th class="num">Bəyənmə</th><th class="num">Şərh</th><th class="num hide-sm">Median bəyənmə</th><th class="num">Engagement rate</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Son 2 həftənin postları</h2>
+    <div class="card">
+      <div class="controls"><label for="acct">Hesab</label><select id="acct"><option value="">Hamısı</option></select><span id="count"></span></div>
+      <div class="posts-box">
+        <table id="tbl-posts">
+          <thead><tr>
+            <th><button class="sort" data-sort="date">Tarix</button></th><th>Hesab</th><th class="hide-sm">Növ</th><th>Mövzu</th>
+            <th class="num"><button class="sort" data-sort="likes">Bəyənmə</button></th><th class="num"><button class="sort" data-sort="comments">Şərh</button></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Qeydlər</h2>
+    <ul class="notes">
+      <li>Məlumat Instagram-a daxil olmadan, açıq profil səhifələrindən yığılır. Reels baxış sayı bu yolla görünmür.</li>
+      <li>Hər profildə yalnız son ~12 post görünür. Çox post paylaşan hesablarda 2 həftənin hamısı görünməyə bilər: <span id="incomplete">—</span></li>
+      <li>Instagram 10 000-dən çox izləyicini yuvarlaqlaşdırır (məsələn 14K, 39K), bu rəqəmlər təxminidir.</li>
+      <li>Başqa hesabla birgə (collab) paylaşılan postlar hər iki hesabda sayılır, yanında müəllif göstərilir.</li>
+    </ul>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(function () {
+  const ME = 'abb.invest';
+  const nf = new Intl.NumberFormat('az-AZ');
+  const pf = new Intl.NumberFormat('az-AZ', { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = (v) => (v == null || Number.isNaN(v) ? '—' : nf.format(v));
+  const pct = (v) => (v == null || Number.isNaN(v) ? '—' : pf.format(v));
+  const MONTHS = ['yan', 'fev', 'mar', 'apr', 'may', 'iyn', 'iyl', 'avq', 'sen', 'okt', 'noy', 'dek'];
+  const fdate = (s) => { const d = new Date(s.slice(0, 10) + 'T00:00:00Z'); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()]; };
+  const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const median = (a) => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y); const m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+
+  function summarize(accounts, posts) {
+    const rows = accounts.map((a) => {
+      const ps = posts.filter((p) => p.account === a.account);
+      const likes = ps.map((p) => p.likes).filter((v) => v != null);
+      const eng = median(ps.filter((p) => p.likes != null).map((p) => p.likes + (p.comments || 0)));
+      return {
+        ...a, posts_2w: ps.length, reels_2w: ps.filter((p) => p.type === 'Reels').length,
+        posts_only_2w: ps.filter((p) => p.type !== 'Reels').length,
+        likes_2w: likes.reduce((s, v) => s + v, 0),
+        comments_2w: ps.map((p) => p.comments).filter((v) => v != null).reduce((s, v) => s + v, 0),
+        median_likes: median(likes), eng_rate: eng == null || !a.followers ? null : eng / a.followers,
+      };
+    });
+    const rank = (f, key) => [...rows].sort((x, y) => (y[f] ?? -1) - (x[f] ?? -1)).forEach((r, i) => { r[key] = i + 1; });
+    rank('followers', 'rank_followers'); rank('median_likes', 'rank_median'); rank('eng_rate', 'rank_eng');
+    return rows.sort((x, y) => y.followers - x.followers);
+  }
+
+  function hbar(box, rows, series, valueFmt) {
+    box.replaceChildren();
+    const tip = document.createElement('div'); tip.className = 'tip'; tip.hidden = true; box.appendChild(tip);
+    const W = Math.max(260, box.clientWidth), rowH = 30, H = rows.length * rowH + 8;
+    const svg = d3.select(box).insert('svg', '.tip').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    const probe = svg.append('text').attr('font-size', 12).style('font-family', 'var(--sans)');
+    const total = (r) => series.reduce((s, se) => s + (r[se.field] || 0), 0);
+    let labW = 0, valW = 0;
+    rows.forEach((r) => { probe.text(r.name); labW = Math.max(labW, probe.node().getComputedTextLength()); probe.text(valueFmt(total(r))); valW = Math.max(valW, probe.node().getComputedTextLength()); });
+    probe.remove();
+    const left = Math.ceil(labW) + 10, right = Math.ceil(valW) + 10;
+    const x = d3.scaleLinear([0, d3.max(rows, total) || 1], [left, Math.max(left + 20, W - right)]);
+    const y = d3.scaleBand(rows.map((r) => r.account), [4, H - 4]).padding(0.3);
+    const fg = cssVar('--fg'), muted = cssVar('--muted'), bar = cssVar('--bar'), accent = cssVar('--accent');
+    const g = svg.selectAll('g').data(rows).join('g');
+    g.append('text').attr('x', left - 8).attr('y', (r) => y(r.account) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end')
+      .attr('font-size', 12).style('font-family', 'var(--sans)').attr('fill', (r) => (r.account === ME ? fg : muted))
+      .attr('font-weight', (r) => (r.account === ME ? 600 : 400)).text((r) => r.name);
+    g.each(function (r) {
+      let acc = 0;
+      series.forEach((se) => {
+        const v = r[se.field] || 0; if (!v) return;
+        d3.select(this).append('rect').attr('x', x(acc)).attr('y', y(r.account)).attr('width', Math.max(1, x(acc + v) - x(acc))).attr('height', y.bandwidth()).attr('rx', 3)
+          .attr('fill', se.color ? cssVar(se.color) : (r.account === ME ? accent : bar));
+        acc += v;
+      });
+      d3.select(this).append('text').attr('x', x(total(r)) + 6).attr('y', y(r.account) + y.bandwidth() / 2).attr('dy', '0.35em')
+        .attr('font-size', 12).style('font-family', 'var(--sans)').attr('fill', muted).text(valueFmt(total(r)));
+    });
+    g.append('rect').attr('x', 0).attr('y', (r) => y(r.account) - 2).attr('width', W).attr('height', y.bandwidth() + 4).attr('fill', 'transparent')
+      .on('mousemove', (event, r) => {
+        tip.replaceChildren();
+        const h = document.createElement('div'); h.className = 'k'; h.textContent = r.name; tip.appendChild(h);
+        series.forEach((se) => { const d = document.createElement('div'); d.textContent = se.label + ': ' + valueFmt(r[se.field]); tip.appendChild(d); });
+        tip.hidden = false;
+        const b = box.getBoundingClientRect();
+        let tx = event.clientX - b.left + 12, ty = event.clientY - b.top + 12;
+        if (tx + tip.offsetWidth > b.width) tx = Math.max(0, event.clientX - b.left - tip.offsetWidth - 12);
+        if (ty + tip.offsetHeight > b.height) ty = Math.max(0, b.height - tip.offsetHeight);
+        tip.style.left = tx + 'px'; tip.style.top = ty + 'px';
+      })
+      .on('mouseleave', () => { tip.hidden = true; });
+  }
+
+  let state = null, pick = '', sortKey = 'date', sortDir = -1;
+  const sel = document.getElementById('acct');
+  sel.addEventListener('change', () => { pick = sel.value; drawPosts(); });
+  document.querySelectorAll('.sort').forEach((b) => b.addEventListener('click', () => {
+    if (sortKey === b.dataset.sort) sortDir = -sortDir; else { sortKey = b.dataset.sort; sortDir = -1; }
+    drawPosts();
+  }));
+
+  function drawPosts() {
+    const { data } = state;
+    const names = new Map(data.accounts.map((a) => [a.account, a.name]));
+    const list = data.posts.filter((p) => !pick || p.account === pick).sort((a, b) => {
+      const va = a[sortKey], vb = b[sortKey];
+      if (va == null) return 1; if (vb == null) return -1;
+      return (va < vb ? -1 : va > vb ? 1 : 0) * sortDir;
+    });
+    document.getElementById('count').textContent = nf.format(list.length) + ' post';
+    document.querySelectorAll('#tbl-posts th').forEach((th) => {
+      const b = th.querySelector('.sort');
+      if (b) th.setAttribute('aria-sort', b.dataset.sort === sortKey ? (sortDir < 0 ? 'descending' : 'ascending') : 'none');
+    });
+    const tb = document.querySelector('#tbl-posts tbody'); tb.replaceChildren();
+    list.forEach((p) => {
+      const tr = document.createElement('tr'); if (p.account === ME) tr.className = 'me';
+      const td = (t, c) => { const d = document.createElement('td'); if (t != null) d.textContent = t; if (c) d.className = c; tr.appendChild(d); return d; };
+      td(fdate(p.date)); td(names.get(p.account) || p.account);
+      const pill = document.createElement('span'); pill.className = 'pill'; pill.textContent = p.type; td(null, 'hide-sm').appendChild(pill);
+      const tp = td(null, 'topic');
+      if (typeof p.url === 'string' && p.url.startsWith('https://www.instagram.com/')) { const a = document.createElement('a'); a.href = p.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = p.topic || '(mətnsiz)'; tp.appendChild(a); }
+      else tp.textContent = p.topic;
+      if (p.collab) { const s = document.createElement('div'); s.className = 'collab'; s.textContent = 'Müəllif: @' + p.author; tp.appendChild(s); }
+      td(p.likes == null ? 'gizlədilib' : fmt(p.likes), 'num'); td(fmt(p.comments), 'num');
+      tb.appendChild(tr);
+    });
+  }
+
+  function draw() {
+    if (!state) return;
+    const { data, rows } = state;
+    const me = rows.find((r) => r.account === ME) || {};
+    document.querySelectorAll('[data-f]').forEach((el) => { el.textContent = el.dataset.f === 'eng_rate' ? pct(me[el.dataset.f]) : fmt(me[el.dataset.f]); });
+    const take = document.getElementById('take'); take.replaceChildren();
+    const b = (v) => { const e = document.createElement('b'); e.textContent = v; return e; };
+    take.append('ABB Invest izləyici sayına görə ' + rows.length + ' hesab arasında ', b(fmt(me.rank_followers)), '-ci yerdədir. Son 2 həftədə ',
+      b(fmt(me.posts_2w)), ' post paylaşıb, median bəyənməyə görə ', b(fmt(me.rank_median)), '-ci, engagement rate-ə görə ', b(fmt(me.rank_eng)), '-ci yerdədir.');
+    const st = document.getElementById('stamp'); st.replaceChildren();
+    st.append('Son yeniləmə: ' + fdate(data.updated_at) + ' ' + data.updated_at.slice(0, 4) + ', ' + data.updated_at.slice(11, 16) + ' (Bakı vaxtı)');
+    const stale = data.accounts.filter((a) => a.data_date && a.data_date !== data.window_end);
+    if (stale.length) { const w = document.createElement('span'); w.className = 'warn'; w.textContent = ' · Son yeniləmədə oxunmayan hesablar (köhnə rəqəmlər göstərilir): ' + stale.map((a) => a.name + ' (' + fdate(a.data_date) + ')').join(', '); st.appendChild(w); }
+    hbar(document.getElementById('ch-followers'), rows, [{ field: 'followers', label: 'İzləyici' }], fmt);
+    hbar(document.getElementById('ch-posts'), [...rows].sort((x, y) => y.posts_2w - x.posts_2w), [{ field: 'posts_only_2w', label: 'Post', color: '--accent' }, { field: 'reels_2w', label: 'Reels', color: '--accent-2' }], fmt);
+    hbar(document.getElementById('ch-median'), [...rows].sort((x, y) => (y.median_likes ?? -1) - (x.median_likes ?? -1)), [{ field: 'median_likes', label: 'Median bəyənmə' }], fmt);
+    hbar(document.getElementById('ch-eng'), [...rows].sort((x, y) => (y.eng_rate ?? -1) - (x.eng_rate ?? -1)), [{ field: 'eng_rate', label: 'Engagement rate' }], pct);
+    const tb = document.querySelector('#tbl-summary tbody'); tb.replaceChildren();
+    rows.forEach((r) => {
+      const tr = document.createElement('tr'); if (r.account === ME) tr.className = 'me';
+      [[r.name, ''], [fmt(r.followers), 'num'], [fmt(r.posts_total), 'num hide-sm'], [fmt(r.posts_2w), 'num'], [fmt(r.reels_2w), 'num hide-sm'], [fmt(r.likes_2w), 'num'], [fmt(r.comments_2w), 'num'], [fmt(r.median_likes), 'num hide-sm'], [pct(r.eng_rate), 'num']]
+        .forEach(([t, c]) => { const td = document.createElement('td'); td.textContent = t; if (c) td.className = c; tr.appendChild(td); });
+      tb.appendChild(tr);
+    });
+    document.getElementById('window').textContent = fdate(data.window_start) + ' – ' + fdate(data.window_end) + ' ' + data.window_end.slice(0, 4);
+    const inc = data.accounts.filter((a) => !a.complete);
+    document.getElementById('incomplete').textContent = inc.length ? inc.map((a) => a.name + ' (' + fdate(a.visible_from) + ' tarixindən)').join(', ') + '.' : 'hazırda hamısı tamdır.';
+    if (sel.options.length !== data.accounts.length + 1) sel.replaceChildren(new Option('Hamısı', ''), ...data.accounts.map((a) => new Option(a.name, a.account)));
+    sel.value = pick;
+    drawPosts();
+  }
+
+  fetch('data/latest.json', { cache: 'no-store' })
+    .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then((data) => { state = { data, rows: summarize(data.accounts, data.posts) }; draw(); })
+    .catch(() => { const t = document.getElementById('take'); t.textContent = 'Məlumat yüklənmədi. Bir az sonra yenidən yoxlayın.'; t.className = 'take error'; });
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(draw, 150); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+})();
+</script>
+</body>
+</html>
